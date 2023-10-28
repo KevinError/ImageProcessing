@@ -310,34 +310,40 @@ public class Hw2 {
     }
 
     public static BufferedImage RemoveBitPlane(BufferedImage inputImage, int bitRemoved) {
+
+
         ArrayList<Integer> bits = new ArrayList<>();
-        for (int i = 1; i <= 8; i++){
+        for (int i = 1; i <= 8; i++) {
             bits.add(i);
         }
         bits.remove(bitRemoved - 1);
+        // Don't include the bit plane that you removed
+
         int width = inputImage.getWidth();
         int height = inputImage.getHeight();
-        BufferedImage outputImage = new BufferedImage(width, height, inputImage.TYPE_BYTE_GRAY);
+        BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 int pixelValue = inputImage.getRGB(x, y) & 0xFF;
                 String binaryPixelValue = Integer.toBinaryString(pixelValue);
-                System.out.println(binaryPixelValue);
-
-                // Ensure the binary string has 8 bits
                 while (binaryPixelValue.length() < 8) {
                     binaryPixelValue = "0" + binaryPixelValue;
                 }
 
-                binaryPixelValue.charAt(bitRemoved - 1) = '1';
-                int combinedPixelValue = 0;
+                int modifiedPixel = 0;
+                for (int bit : bits) {
+                    int bitPosition = 7 - (bit - 1);
 
-                    combinedPixelValue += (int) (bitValue * Math.pow(2, bit - 1));
+                    // checks the value is '1' to assign the value based on it.
+                    if (binaryPixelValue.charAt(bitPosition) == '1') {
+                        modifiedPixel += (int) (Math.pow(2, bit - 1));
+                        // 2 ^ bit = 2,4,8,16,32,64,128,256
+                    }
                 }
-                //output.setRGB(x, y, (scaledBit << 16) | (scaledBit << 8) | scaledBit);
-                //Color combinedColor = new Color(combinedPixelValue, combinedPixelValue, combinedPixelValue);
-                outputImage.setRGB(x, y, (combinedPixelValue << 16) | (combinedPixelValue << 8) | combinedPixelValue);
+
+                Color newColor = new Color(modifiedPixel, modifiedPixel, modifiedPixel);
+                outputImage.setRGB(x, y, newColor.getRGB());
             }
         }
 

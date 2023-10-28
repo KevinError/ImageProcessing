@@ -15,8 +15,8 @@ import javax.swing.JFrame;
 public class Main{
 
 
-    static final String imageSource = "C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\Lena.jpg";
-
+    static final String imageSource = "C:\\Users\\khk40\\Documents\\GitHub\\ImageProcessing\\resource\\Lena.jpg";
+    static final String outputSource = "C:\\Users\\khk40\\Documents\\GitHub\\ImageProcessing\\resource\\";
     private JFrame frame;
     private static JLabel imageLabel;
 
@@ -35,24 +35,6 @@ public class Main{
 
 
 
-    private static char[] map;
-
-    private static void initMap() {
-        map = new char[256];
-        int[][] ranges = new int[][] {
-                {0, 50}, {50, 70}, {70, 100}, {100, 130},
-                {130, 160}, {160, 180}, {180, 200},
-                {200, 230}, {230, 256}
-        };
-        char[] v = {' ', '#', '8', '&', 'o', ':', '*', '.', ' '};
-        for(int i=0; i<v.length; i++) {
-            for(int j=ranges[i][0]; j < ranges[i][1]; j++) {
-                map[j] = v[i];
-            }
-        }
-    }
-
-
 
     private static void chooseMethod() throws IOException {
         // Load and display an image (change the path as needed)
@@ -62,7 +44,7 @@ public class Main{
 
         int selectedResolution = Integer.valueOf( selectedResolutionString);
         int selectedMethodName2 = Integer.valueOf((String) c3.getSelectedItem());
-        ImageIcon imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\output.jpg");
+        ImageIcon imageicon =  new ImageIcon(outputSource + "output.jpg");
 
         try {
             // Load the input image
@@ -72,86 +54,86 @@ public class Main{
             // Perform histogram equalization
             if (selectedMethodName.equals("global histogram equalization")) {
                 outputImage = Hw2.equalizeHistogram(inputImage);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\global.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\global.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "global.jpg"));
+                imageicon =  new ImageIcon(outputSource + "global.jpg");
                 System.out.println("global");
             } else if (selectedMethodName.equals("local histogram equalization")) {
                 outputImage = Hw2.localHistogramEqualization(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\local.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\local.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "local.jpg"));
+                imageicon =  new ImageIcon(outputSource + "local.jpg");
                 System.out.println("global2");
             } else if (selectedMethodName.equals("Smoothing filter")) {
                 outputImage = Hw2.applyAverageSmoothing(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\smoothing.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\smoothing.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "smoothing.jpg"));
+                imageicon =  new ImageIcon(outputSource + "smoothing.jpg");
             } else if (selectedMethodName.equals("Median filter")) {
                 outputImage = Hw2.applyMedianFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\median.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\median.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "median.jpg"));
+                imageicon =  new ImageIcon(outputSource + "median.jpg");
             } else if (selectedMethodName.equals("Sharpening Laplacian filter")) {
                 outputImage = Hw2.applyLaplacianSharpening(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\laplacian.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\laplacian.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "laplacian.jpg"));
+                imageicon =  new ImageIcon(outputSource + "laplacian.jpg");
             } else if (selectedMethodName.equals("High-boosting filter")) {
                 outputImage = Hw2.applyHighBoostFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\highboost.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\highboost.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "highboost.jpg"));
+                imageicon =  new ImageIcon(outputSource + "highboost.jpg");
             } else if (selectedMethodName.equals("removeBitPlane")) {
                 outputImage = Hw2.RemoveBitPlane(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\removeBitPlane.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\removeBitPlane.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "removeBitPlane.jpg"));
+                imageicon =  new ImageIcon(outputSource + "removeBitPlane.jpg");
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             } else if (selectedMethodName.equals("nearest neighbor method")) {
                 outputImage = Hw1.calculateNeighbor(inputImage, selectedResolution);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\neighbor.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\neighbor.jpg");
+                ImageIO.write(outputImage, "jpg", new File( outputSource+ "neighbor.jpg"));
+                imageicon =  new ImageIcon( outputSource + "neighbor.jpg");
             } else if (selectedMethodName.equals("linear method")) {
                 outputImage = Hw1.calculateLinear(inputImage, selectedResolution);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\Linear.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\Linear.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "Linear.jpg"));
+                imageicon =  new ImageIcon( outputSource + "Linear.jpg");
             } else if (selectedMethodName.equals("bilinear interpolation method")) {
                 outputImage = Hw1.calculateBilnear(inputImage, selectedResolution);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\Bilinear.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\Bilinear.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "Bilinear.jpg"));
+                imageicon =  new ImageIcon(outputSource + "Bilinear.jpg");
             } else if (selectedMethodName.equals("gray level resolution")) {
                 outputImage = Hw1.varyGrayLevelResolution(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\grayLevelResolution.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\grayLevelResolution.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "grayLevelResolution.jpg"));
+                imageicon =  new ImageIcon(outputSource + "grayLevelResolution.jpg");
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             } else if (selectedMethodName.equals("arithmetic")) {
                 outputImage = Hw3.applyArithmeticMeanFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\arithmetic.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\arithmetic.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "arithmetic.jpg"));
+                imageicon =  new ImageIcon(outputSource + "arithmetic.jpg");
             } else if (selectedMethodName.equals("geometric")) {
                 outputImage = Hw3.applyGeometricMeanFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\geometric.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\geometric.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "geometric.jpg"));
+                imageicon =  new ImageIcon(outputSource + "geometric.jpg");
             } else if (selectedMethodName.equals("harmonic")) {
                 outputImage = Hw3.applyHarmonicMeanFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\harmonic.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\harmonic.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "harmonic.jpg"));
+                imageicon =  new ImageIcon(outputSource + "harmonic.jpg");
             } else if (selectedMethodName.equals("contraharmonic")) {
                 outputImage = Hw3.applyContraharmonicMeanFilter(inputImage, selectedMethodName2, selectedResolution);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\contraharmonic.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\contraharmonic.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "contraharmonic.jpg"));
+                imageicon =  new ImageIcon(outputSource + "contraharmonic.jpg");
             } else if (selectedMethodName.equals("max filter")) {
                 outputImage = Hw3.applyMaxFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\max filter.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\max filter.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "max filter.jpg"));
+                imageicon =  new ImageIcon(outputSource + "max filter.jpg");
             } else if (selectedMethodName.equals("min filter")) {
                 outputImage = Hw3.applyMinFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\min filter.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\min filter.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "min filter.jpg"));
+                imageicon =  new ImageIcon(outputSource + "min filter.jpg");
             } else if (selectedMethodName.equals("midpoint filter")) {
                 outputImage = Hw3.applyMidpointFilter(inputImage, selectedMethodName2);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\midpoint filter.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\midpoint filter.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "midpoint filter.jpg"));
+                imageicon =  new ImageIcon(outputSource + "midpoint filter.jpg");
             } else if (selectedMethodName.equals("alpha-trimmed")) {
                 outputImage = Hw3.applyAlphaTrimmedMeanFilter(inputImage, selectedMethodName2, selectedResolution);
-                ImageIO.write(outputImage, "jpg", new File("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\alpha-trimmed.jpg"));
-                imageicon =  new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\alpha-trimmed.jpg");
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "alpha-trimmed.jpg"));
+                imageicon =  new ImageIcon(outputSource + "alpha-trimmed.jpg");
             }
 
         } catch (IOException e) {
@@ -170,7 +152,7 @@ public class Main{
     public static void Display2(){
         JFrame frame = new JFrame("Multiple Dropdowns Example");
         ImageIcon icon = new ImageIcon(imageSource);
-        icon2 = new ImageIcon("C:\\Users\\khk40\\Documents\\GitHub\\hw5800final\\ImageProcessing\\resource\\output.jpg");
+        icon2 = new ImageIcon(outputSource + "output.jpg");
         JLabel imageLabel1 = new JLabel();
         imageLabel2 = new JLabel();
 
