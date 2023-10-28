@@ -350,5 +350,93 @@ public class Hw2 {
         return outputImage;
     }
 
+    public static BufferedImage RemoveHigherBits(BufferedImage inputImage, int bitRemoved) {
+
+
+        ArrayList<Integer> bits = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            bits.add(i);
+        }
+        bits.remove(8 - 1);
+        bits.remove(7 - 1);
+        bits.remove(6 - 1);
+        bits.remove(5 - 1);
+        // Don't include the bit plane that you removed
+
+        int width = inputImage.getWidth();
+        int height = inputImage.getHeight();
+        BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int pixelValue = inputImage.getRGB(x, y) & 0xFF;
+                String binaryPixelValue = Integer.toBinaryString(pixelValue);
+                while (binaryPixelValue.length() < 8) {
+                    binaryPixelValue = "0" + binaryPixelValue;
+                }
+
+                int modifiedPixel = 0;
+                for (int bit : bits) {
+                    int bitPosition = 7 - (bit - 1);
+
+                    // checks the value is '1' to assign the value based on it.
+                    if (binaryPixelValue.charAt(bitPosition) == '1') {
+                        modifiedPixel += (int) (Math.pow(2, bit - 1));
+                        // 2 ^ bit = 2,4,8,16,32,64,128,256
+                    }
+                }
+
+                Color newColor = new Color(modifiedPixel, modifiedPixel, modifiedPixel);
+                outputImage.setRGB(x, y, newColor.getRGB());
+            }
+        }
+
+        return outputImage;
+    }
+
+    public static BufferedImage RemoveLowerBits(BufferedImage inputImage, int bitRemoved) {
+
+
+        ArrayList<Integer> bits = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            bits.add(i);
+        }
+        bits.remove(1 - 1);
+        bits.remove(2 - 1);
+        bits.remove(3 - 1);
+        bits.remove(4 - 1);
+        // Don't include the bit plane that you removed
+
+        int width = inputImage.getWidth();
+        int height = inputImage.getHeight();
+        BufferedImage outputImage = new BufferedImage(width, height, inputImage.getType());
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int pixelValue = inputImage.getRGB(x, y) & 0xFF;
+                String binaryPixelValue = Integer.toBinaryString(pixelValue);
+                while (binaryPixelValue.length() < 8) {
+                    binaryPixelValue = "0" + binaryPixelValue;
+                }
+
+                int modifiedPixel = 0;
+                for (int bit : bits) {
+                    int bitPosition = 7 - (bit - 1);
+
+                    // checks the value is '1' to assign the value based on it.
+                    if (binaryPixelValue.charAt(bitPosition) == '1') {
+                        modifiedPixel += (int) (Math.pow(2, bit - 1));
+                        // 2 ^ bit = 2,4,8,16,32,64,128,256
+                    }
+                }
+
+                Color newColor = new Color(modifiedPixel, modifiedPixel, modifiedPixel);
+                outputImage.setRGB(x, y, newColor.getRGB());
+            }
+        }
+
+        return outputImage;
+    }
+
 
 }

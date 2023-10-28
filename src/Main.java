@@ -81,7 +81,15 @@ public class Main{
             } else if (selectedMethodName.equals("removeBitPlane")) {
                 outputImage = Hw2.RemoveBitPlane(inputImage, selectedMethodName2);
                 ImageIO.write(outputImage, "jpg", new File(outputSource + "removeBitPlane.jpg"));
-                imageicon =  new ImageIcon(outputSource + "removeBitPlane.jpg");
+                imageicon = new ImageIcon(outputSource + "removeBitPlane.jpg");
+            } else if (selectedMethodName.equals("RemoveHigherBitPlane")) {
+                outputImage = Hw2.RemoveHigherBits(inputImage, selectedMethodName2);
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "RemoveHigherBitPlane.jpg"));
+                imageicon = new ImageIcon(outputSource + "RemoveHigherBitPlane.jpg");
+            } else if (selectedMethodName.equals("RemoveLowerBitPlane")) {
+                outputImage = Hw2.RemoveLowerBits(inputImage, selectedMethodName2);
+                ImageIO.write(outputImage, "jpg", new File(outputSource + "RemoveLowerBitPlane.jpg"));
+                imageicon =  new ImageIcon(outputSource + "RemoveLowerBitPlane.jpg");
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             } else if (selectedMethodName.equals("nearest neighbor method")) {
@@ -166,7 +174,7 @@ public class Main{
                 "nearest neighbor method", "linear method", "bilinear interpolation method", "gray level resolution",
                 "global histogram equalization", "local histogram equalization",
                 "Smoothing filter", "Median filter", "Sharpening Laplacian filter", "High-boosting filter",
-                "removeBitPlane", "arithmetic", "geometric", "harmonic",
+                "removeBitPlane", "RemoveHigherBitPlane", "RemoveLowerBitPlane", "arithmetic", "geometric", "harmonic",
                 "contraharmonic", "max filter", "min filter", "midpoint filter", "alpha-trimmed"};
         c1= new JComboBox<>(options1);
         c1.setSelectedIndex(0); // Set the default selected item
