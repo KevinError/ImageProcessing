@@ -22,21 +22,21 @@ public class Hw4Main {
         return grayscale;
     }
 
-    public static double CalculateRootMeanSquareError(BufferedImage input, BufferedImage compressed) {
-        double mse = 0;
-        int height = input.getHeight();
-        int width = input.getWidth();
+    public static double CalculateRootMeanSquareError(BufferedImage inputImage, BufferedImage compressedImage) {
+        double MeanSquareError = 0;
+        int height = inputImage.getHeight();
+        int width = inputImage.getWidth();
 
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                int originalPixel = new Color(input.getRGB(x, y)).getRed();
-                int compressedPixel = new Color(compressed.getRGB(x, y)).getRed();
-                mse += Math.pow(originalPixel - compressedPixel, 2);
+                int originalPixel = new Color(inputImage.getRGB(x, y)).getRed();
+                int compressedPixel = new Color(compressedImage.getRGB(x, y)).getRed();
+                MeanSquareError += Math.pow(originalPixel - compressedPixel, 2);
             }
         }
 
-        mse /= (width * height);
-        return Math.sqrt(mse);
+        MeanSquareError /= (width * height);
+        return Math.sqrt(MeanSquareError);
     }
 
     public static void main(String[] args) throws IOException {
